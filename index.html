@@ -584,6 +584,119 @@ button {
     font-size: 14px;
   }
 }
+
+/* =========================================================
+   DIVINE FOODIES — PHONE-FIRST LAYOUT OVERRIDES
+   Keeps every section inside the viewport and balances
+   product cards / Add to Cart controls on small screens.
+   ========================================================= */
+html, body { width:100%; max-width:100%; overflow-x:hidden; }
+*, *::before, *::after { box-sizing:border-box; }
+img, iframe, video, svg { max-width:100%; }
+button, input, textarea, select { max-width:100%; font:inherit; }
+.container { width:min(1180px, calc(100% - 32px)); margin-inline:auto; }
+
+/* Product cards */
+.grid { align-items:stretch; }
+.card { min-width:0; display:flex; flex-direction:column; }
+.card .pic { width:100%; overflow:hidden; }
+.card .product-photo { width:100%; height:100%; object-fit:cover; display:block; }
+.card .body { min-width:0; display:flex; flex-direction:column; flex:1; }
+.card .body h3, .card .desc { overflow-wrap:anywhere; }
+.card .desc { flex:1; }
+.card .row { width:100%; min-width:0; gap:10px; }
+.card .price { min-width:0; white-space:nowrap; }
+.card .add,
+.card .details { min-height:42px; }
+.card .add { flex:1 1 auto; min-width:0; text-align:center; white-space:nowrap; }
+
+/* Modals and cart must fit the phone */
+.panel, .modal { width:100%; max-width:100vw; overflow:hidden; }
+.side { width:min(430px,100vw); max-width:100vw; padding:20px; overflow-x:hidden; }
+.modalBox { width:min(720px,calc(100vw - 24px)); max-width:calc(100vw - 24px); padding:22px; }
+.cartItem { min-width:0; }
+.cartItem .ci { min-width:0; overflow-wrap:anywhere; }
+.total { gap:12px; }
+
+@media (max-width:900px) {
+  .container { width:calc(100% - 28px); }
+  .hero { padding:55px 0 45px; }
+  .heroGrid { grid-template-columns:1fr; gap:28px; }
+  .heroArt { min-height:270px; }
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  .cats { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+  .contactGrid, .aboutGrid { grid-template-columns:1fr; }
+}
+
+@media (max-width:600px) {
+  .container { width:calc(100% - 20px); }
+  header .nav { min-height:64px; gap:8px; }
+  .logo { font-size:1.05rem; white-space:nowrap; }
+  .links { display:none; position:absolute; left:10px; right:10px; top:64px; z-index:50; flex-direction:column; gap:0; padding:8px; background:#fff; border-radius:14px; box-shadow:var(--sh); }
+  .links.open { display:flex; }
+  .links a { padding:12px; }
+  .menu { display:block; }
+  .actions { flex-shrink:0; }
+  .circle { width:40px; height:40px; }
+
+  .hero { padding:38px 0 35px; }
+  .hero h1 { font-size:clamp(2rem,10vw,3rem); }
+  .hero p { font-size:.98rem; }
+  .heroBtns .btn { width:100%; text-align:center; }
+  .heroArt { min-height:220px; border-radius:24px; }
+  .food { font-size:6rem; }
+  .float { padding:8px 10px; font-size:.78rem; }
+
+  .cats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cat { padding:14px 6px; }
+  .cat i { font-size:1.6rem; }
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .card { border-radius:14px; }
+  .card .pic { height:145px; font-size:4rem; }
+  .card .body { padding:11px; }
+  .card .body h3 { font-size:.95rem; line-height:1.25; }
+  .card .desc { font-size:.78rem; line-height:1.35; min-height:0; margin-top:3px; }
+  .card .row { flex-direction:column; align-items:stretch; gap:7px; margin-top:10px; }
+  .card .price { text-align:left; font-size:.95rem; }
+  .card .add { width:100%; min-width:0; padding:11px 8px; font-size:.82rem; }
+  .card .details { width:100%; text-align:center; font-size:.82rem; padding:8px 4px; }
+
+  .filters { gap:7px; margin-bottom:18px; overflow-x:auto; flex-wrap:nowrap; padding-bottom:3px; }
+  .filter { flex:0 0 auto; padding:8px 12px; }
+
+  .side { width:100vw; padding:18px 14px; }
+  .side h2 { font-size:1.5rem; }
+  .cartItem { gap:9px; padding:12px 0; }
+  .mini { width:48px; height:48px; flex:0 0 48px; font-size:1.5rem; }
+  .qty { flex-wrap:wrap; }
+  .total { font-size:1.05rem; }
+  .side .btn { width:100%; }
+
+  .modalBox { width:calc(100vw - 20px); max-width:calc(100vw - 20px); max-height:92vh; margin:4vh auto; padding:17px; border-radius:18px; }
+  .modalBox h2 { font-size:1.45rem; }
+  .modalBox .close, .side .close { width:34px; height:34px; }
+  .payment-box { padding:13px; }
+  .payment-row { padding:9px 10px; }
+  .payment-row strong { overflow-wrap:anywhere; }
+  .form input, .form textarea, .form select { width:100%; min-width:0; }
+
+  footer .foot { grid-template-columns:1fr; gap:22px; }
+  .map iframe { height:280px; }
+}
+
+@media (max-width:360px) {
+  .container { width:calc(100% - 16px); }
+  .logo { font-size:.92rem; }
+  .circle { width:37px; height:37px; }
+  .grid { gap:8px; }
+  .card .pic { height:125px; font-size:3.5rem; }
+  .card .body { padding:9px; }
+  .card .body h3 { font-size:.88rem; }
+  .card .desc { font-size:.72rem; }
+  .card .price { font-size:.88rem; }
+  .card .add { font-size:.75rem; padding:10px 5px; }
+}
+
 </style>
 </head>
 <body>
