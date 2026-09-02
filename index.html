@@ -281,9 +281,307 @@
     padding: 9px 12px;
   }
 }
-</style></head>
+
+    /* =========================================
+   DIVINE FOODIES - FULL MOBILE RESPONSIVE
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Images should never overflow their container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Containers automatically fit the screen */
+.container,
+section,
+main,
+header,
+footer {
+  max-width: 100%;
+}
+
+/* Prevent long text from breaking the layout */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button {
+  overflow-wrap: break-word;
+}
+
+
+/* =========================================
+   TABLETS
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .container {
+    width: 94%;
+    max-width: 100%;
+  }
+
+  /* Navigation */
+  nav {
+    max-width: 100%;
+  }
+
+  /* General grids */
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Two-column sections become stacked */
+  .two-column,
+  .two-col,
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Large headings */
+  h1 {
+    font-size: clamp(32px, 7vw, 52px);
+  }
+
+  h2 {
+    font-size: clamp(26px, 5vw, 40px);
+  }
+}
+
+
+/* =========================================
+   MOBILE PHONES
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Header */
+  header {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Navigation */
+  nav {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding: 50px 15px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 9vw, 44px);
+    line-height: 1.1;
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* All normal grids */
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* Cards */
+  .card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Images */
+  .card img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  /* Sections */
+  section {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Forms */
+  form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  /* Buttons */
+  button,
+  .btn {
+    max-width: 100%;
+  }
+
+  /* Contact / About layouts */
+  .contact-grid,
+  .about-grid,
+  .two-column,
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Map */
+  .map {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .map iframe {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Footer */
+  footer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer-grid,
+  .footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  /* Modals */
+  .modal,
+  .modal-content {
+    max-width: calc(100vw - 20px);
+  }
+
+  /* Cart */
+  .cart-panel {
+    width: min(100%, 400px);
+    max-width: 100%;
+  }
+}
+
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media (max-width: 400px) {
+
+  .container {
+    width: 95%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .card {
+    padding: 8px;
+  }
+
+  .card h3 {
+    font-size: 14px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .footer-grid,
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 40px 12px;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 320px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    width: 96%;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+}
+</style>
+</head>
 <body>
-<header><div class="container nav"><a class="logo" href="#home">DIVINE <span>FOODIES</span></a><nav class="links" id="links"><a href="#home">Home</a><a href="#shop">Shop</a><a href="#about">About Us</a><a href="#contact">Contact</a></nav><div class="actions"><button class="circle cartBtn" onclick="openCart()">🛒<span class="count" id="count">0</span></button><button class="circle menu" onclick="document.getElementById('links').classList.toggle('open')">☰</button></div></div></header>
+<header><div class="container nav">
+    <a class="logo" href="#home">DIVINE <span>FOODIES</span></a>
+    <nav class="links" id="links"><a href="#home">Home</a>
+        <a href="#shop">Shop</a><a href="#about">About Us</a>
+        <a href="#contact">Contact</a></nav><div class="actions">
+            <button class="circle cartBtn" onclick="openCart()">🛒<span class="count" id="count">0</span>
+            </button><button class="circle menu" onclick="document.getElementById('links').classList.toggle('open')">☰</button></div></div></header>
 <main>
 <section class="hero" id="home"><div class="container heroGrid"><div><div class="eyebrow">Fresh • Healthy • Delicious</div><h1>Fresh food, made with love.</h1><p>Discover freshly prepared fruit salads, tapioca, parfaits and healthy food appetizers from Divine FoodIES.</p><div class="heroBtns"><a class="btn primary" href="#shop">Shop Now →</a><a class="btn secondary" href="#about">Our Story</a></div></div><div class="heroArt"><div class="float f1">🍓 Fresh Daily</div><div class="food">🥗</div><div class="float f2">✨ Made Fresh</div></div></div></section>
 <section><div class="container"><div class="head"><div><div class="eyebrow">Explore</div><h2>Shop by Category</h2></div><p>Find something fresh for every craving.</p></div><div class="cats"><button class="cat active" data-cat="All"><i>🍽️</i>All</button><button class="cat" data-cat="Fruit Salad"><i>🍓</i>Fruit Salad</button><button class="cat" data-cat="Tapioca"><i>🥣</i>Tapioca</button><button class="cat" data-cat="Parfaits"><i>🍨</i>Parfaits</button><button class="cat" data-cat="Snacks"><i>🥨</i>Snacks</button><button class="cat" data-cat="Drinks"><i>🥤</i>Drinks</button></div></div></section>
@@ -298,7 +596,7 @@
         <h2>Contact Divine Foodies</h2></div></div><div class="contactGrid">
             <div class="contact"><h3>Business Contact</h3>
         <p>📞 Phone: <strong>09010887444</strong></p><p>💬 WhatsApp: <strong>09010887444</strong></p>
-<p>✉️ Email: <strong>divinefoodies164@gmail.com</strong></p><p>📍 Business Address: <strong>ADD BUSINESS ADDRESS</strong>
+<p>✉️ Email: <strong>divinefoodies164@gmail.com</strong></p><p>📍 Business Address: <strong>Lagos and Ogun state</strong>
 </p><button class="btn primary" onclick="getLocation()">📍 Allow My Location</button>
     <p id="loc" class="status"></p></div>
     
