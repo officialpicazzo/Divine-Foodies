@@ -747,17 +747,35 @@ button, input, textarea, select { max-width:100%; font:inherit; }
 </main>
 <footer><div class="container foot"><div><h3>DIVINE FOODIES</h3>
     <p>Freshly prepared fruit salads, tapioca, parfaits and healthy food appetizers.</p>
-</div><div>
-    <h3>Quick Links</h3><p>
-        <a href="#home">Home</a></p>
-    <p><a href="#shop">Shop</a>
-    </p><p><a href="#about">About Us</a></p>
-    <p><a href="#contact">Contact</a>
-   </p>
-  </div>
-<a href="#admin">Admin</a>
-    <div><h3>Order</h3><p>Browse products, add to cart and checkout easily.</p></div>
-</div></footer>
+</div>
+ <div>
+    <h3>Quick Links</h3>
+
+    <p>
+        <a href="#home">Home</a>
+    </p>
+
+    <p>
+        <a href="#shop">Shop</a>
+    </p>
+
+    <p>
+        <a href="#about">About Us</a>
+    </p>
+
+    <p>
+        <a href="#contact">Contact</a>
+    </p>
+
+    <p>
+        <a href="#admin">Admin</a>
+    </p>
+</div>
+
+<div>
+    <h3>Order</h3>
+    <p>Browse products, add to cart and checkout easily.</p>
+</div>
 <!-- CART -->
 <div class="panel" id="cartPanel"><div class="overlay" onclick="closeCart()">
 
@@ -2783,21 +2801,21 @@ onAuthStateChanged(
 
 function route() {
 
-    if (
-        location.hash ===
-        "#admin"
-    ) {
+    if (location.hash === "#admin") {
 
         showAdmin();
 
     } else {
 
         showPublic();
+
     }
 }
 
+window.addEventListener("hashchange", route);
 
-/* ========================= GLOBAL FUNCTIONS ========================= */
+route();
+ /* ========================= GLOBAL FUNCTIONS ========================= */
 
 window.adminLogin = adminLogin;
 window.saveProduct = saveProduct;
