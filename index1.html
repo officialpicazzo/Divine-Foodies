@@ -1390,7 +1390,7 @@ function productModal(id) {
                 <img
                     id="detailMainImage"
                     class="product-photo"
-                    src="${escapeHTML(product.images[0])}"
+                    src="${escapeHTML(Array.isArray(product.images) ? product.images[0] : product.images)}"
                     alt="${escapeHTML(product.name)}"
                 >
             `
@@ -2419,7 +2419,11 @@ function productTable() {
                             product.images?.length
                                 ? `
                                     <img
-                                        src="${escapeHTML(product.images[0])}"
+                                        src="${escapeHTML(
+    Array.isArray(product.images)
+        ? product.images[0]
+        : product.images
+)}"
                                         style="
                                             width:100%;
                                             height:100%;
