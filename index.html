@@ -2536,6 +2536,7 @@ function addProductImageUrl() {
     }
 
     window.pendingProductImages.push(url);
+    pendingProductImages = window.pendingProductImages;
     input.value = "";
     renderProductImagePreview();
 }
@@ -2543,6 +2544,7 @@ function addProductImageUrl() {
 function removeProductImage(index) {
     if (!window.pendingProductImages) window.pendingProductImages = [];
     window.pendingProductImages.splice(index, 1);
+    pendingProductImages = window.pendingProductImages;
     renderProductImagePreview();
 }
 
@@ -2568,6 +2570,75 @@ function renderProductImagePreview() {
             >×</button>
         </div>
     `).join("");
+}
+
+/* ========================= SAVE PRODUCT ========================= */
+
+async function saveProduct(event) {
+    if (event) event.preventDefault();
+
+    if (!adminUser) {
+        alert("You must be logged in as an admin.");
+        return;
+    }
+
+    const name = document.getElementById("pName");
+    const category = document.getElementById("pCategory");
+    const price = document.getElementById("pPrice");
+    const emoji = document.getElementById("pEmoji");
+    const desc = document.getElementById("pDesc");
+    const ingredients = document.getElementById("pIngredients");
+    const editId = document.getElementById("editId");
+    const button = document.getElementById("productSaveBtn");
+
+    const productData = {
+        name: name ? name.value.trim() : "",
+        category: category ? category.value.trim() : "",
+        price: Number(price ? price.value : 0),
+        emoji: emoji ? (emoji.value.trim() || "🍓") : "🍓",
+        description: desc ? desc.value.trim() : "",
+        ingredients: ingredients ? ingredients.value.trim() : "",
+        images: (window.pendingProductImages || pendingProductImages || [])
+            .filter(item => typeof item === "string" && item.trim())
+            .map(item => item.trim()),
+        updatedAt: serverTimestamp()
+    };
+
+    if (!productData.name || !productData.category || !productData.description) {
+        alert("Please complete the required product fields.");
+        return;
+    }
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Saving…";
+    }
+
+    try {
+        const existingId = editId ? editId.value.trim() : "";
+        const productId = existingId || crypto.randomUUID();
+
+        if (existingId) {
+            await updateDoc(doc(db, "Products", existingId), productData);
+        } else {
+            productData.createdAt = serverTimestamp();
+            await setDoc(doc(db, "Products", productId), productData);
+        }
+
+        await loadProducts();
+        resetProductForm();
+        await refreshAdmin();
+
+        alert("Product saved successfully.");
+    } catch (error) {
+        console.error("Save product error:", error);
+        alert("Could not save product:\n\n" + error.message);
+    } finally {
+        if (button) {
+            button.disabled = false;
+            button.textContent = "Save Product";
+        }
+    }
 }
 
 /* ========================= EDIT PRODUCT ========================= */
@@ -2622,36 +2693,8 @@ function editProduct(id) {
             ? [...product.images]
             : [];
 
-    document.getElementById(
-        "imagePreview"
-    ).innerHTML =
-        pendingProductImages.map(
-            (src, index) => `
-
-                <div
-                    class="image-preview-item"
-                >
-
-                    <img
-                        src="${escapeHTML(src)}"
-                        alt="Product image"
-                    >
-
-                    <button
-                        type="button"
-                        onclick="
-                            removePendingImage(
-                                ${index}
-                            )
-                        "
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-            `
-        ).join("");
+    pendingProductImages = window.pendingProductImages;
+    renderProductImagePreview();
 
     document.getElementById(
         "productFormTitle"
@@ -2733,6 +2776,7 @@ function resetProductForm() {
     if (imagePreview) imagePreview.innerHTML = "";
 
     window.pendingProductImages = [];
+    pendingProductImages = window.pendingProductImages;
 
     const title = document.getElementById("productFormTitle");
     if (title) title.textContent = "Add Product";
