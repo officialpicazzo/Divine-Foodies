@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head> 
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -800,7 +800,41 @@ button, input, textarea, select { max-width:100%; font:inherit; }
 </div>
 <button class="btn primary">Place Order</button></form></div></div>
 <!-- ADMIN -->
-<section class="admin" id="adminSection" style="display:none"><div class="container"><div id="adminLogin" class="login"><div class="eyebrow">Divine Foodies</div><h2>Admin Login</h2><p style="color:#777">Sign in with the Firebase admin account you already created.</p><form class="form" id="adminLoginForm" onsubmit="adminLogin(event)"><input id="adminUser" type="email" placeholder="Admin Email" autocomplete="username" required><div class="password-wrap"><input id="adminPass" type="password" placeholder="Password" autocomplete="current-password" required><button type="button" class="password-eye" id="toggleAdminPassword" aria-label="Show password" title="Show password">👁</button></div><button class="btn primary" id="adminLoginButton">Login</button><div id="loginError" class="loginError" role="alert"></div></form><p style="margin-top:10px;font-size:.8rem;color:#777">Your account must have role: admin in Users/{uid}.</p></div><div id="adminApp" class="hidden"><div class="adminTop"><div><div class="eyebrow">Administration</div><h2>Divine Foodies Dashboard</h2><small id="adminIdentity" style="color:#777"></small></div><button class="btn secondary" onclick="logoutAdmin()">Logout</button></div><div class="adminNav"><button class="active" onclick="showAdminTab('overview',this)">Overview</button><button onclick="showAdminTab('productsTab',this)">Products</button><button onclick="showAdminTab('ordersTab',this)">Orders</button><button onclick="showAdminTab('customersTab',this)">Customers</button><button onclick="showAdminTab('settingsTab',this)">Settings</button></div><div id="overview" class="adminTab"><div class="dash"><div class="stat"><small>Products</small><strong id="statProducts">0</strong></div><div class="stat"><small>Orders</small><strong id="statOrders">0</strong></div><div class="stat"><small>Customers</small><strong id="statCustomers">0</strong></div><div class="stat"><small>Sales</small><strong id="statSales">₦0</strong></div></div><div class="adminPanel"><h3>Recent Orders</h3><div id="recentOrders"></div></div></div><div id="productsTab" class="adminTab hidden"><div class="adminPanel"><h3 id="productFormTitle">Add Product</h3><form class="form adminProduct" id="productForm" onsubmit="saveProduct(event)"><input id="pName" placeholder="Product Name" required><input id="pCategory" placeholder="Category" required><input id="pPrice" type="number" placeholder="Price" required><input id="pEmoji" placeholder="Product Image / Emoji" value="🍓"><textarea id="pDesc" class="full" placeholder="Description" required></textarea><input id="pIngredients" class="full" placeholder="Ingredients"><input type="hidden" id="editId"><div class="full"><label style="font-weight:700">Product Images</label><input id="pImages" type="file" accept="image/*" multiple><small style="color:#777">Select one or more images. The first becomes the main image.</small></div><div class="full"><button class="btn primary" id="productSaveBtn">Save Product</button> <button type="button" class="btn secondary" onclick="resetProductForm()">Clear</button></div></form></div><div class="adminPanel"><h3>Manage Products</h3><div id="adminProducts"></div></div></div><div id="ordersTab" class="adminTab hidden"><div class="adminPanel"><h3>Manage Orders</h3><div id="adminOrders"></div></div></div><div id="customersTab" class="adminTab hidden"><div class="adminPanel"><h3>View Customers</h3><div id="adminCustomers"></div></div></div><div id="settingsTab" class="adminTab hidden"><div class="adminPanel"><h3>Settings</h3><p style="color:#777">Firebase collections required by the project: Users, Products, Orders, Categories, Testimonials, Settings.</p><p style="color:#777;margin-top:10px">Firebase is connected to this website. Products, orders, customers and product images use the Firebase project configured in this file.</p></div></div></div></div></section>
+<section class="admin" id="adminSection" style="display:none"><div class="container"><div id="adminLogin" class="login"><div class="eyebrow">Divine Foodies</div><h2>Admin Login</h2><p style="color:#777">Sign in with the Firebase admin account you already created.</p><form class="form" id="adminLoginForm" onsubmit="adminLogin(event)"><input id="adminUser" type="email" placeholder="Admin Email" autocomplete="username" required><div class="password-wrap"><input id="adminPass" type="password" placeholder="Password" autocomplete="current-password" required><button type="button" class="password-eye" id="toggleAdminPassword" aria-label="Show password" title="Show password">👁</button></div><button class="btn primary" id="adminLoginButton">Login</button><div id="loginError" class="loginError" role="alert"></div></form><p style="margin-top:10px;font-size:.8rem;color:#777">Your account must have role: admin in Users/{uid}.</p></div><div id="adminApp" class="hidden"><div class="adminTop"><div><div class="eyebrow">Administration</div><h2>Divine Foodies Dashboard</h2><small id="adminIdentity" style="color:#777"></small></div><button class="btn secondary" onclick="logoutAdmin()">Logout</button></div><div class="adminNav"><button class="active" onclick="showAdminTab('overview',this)">Overview</button><button onclick="showAdminTab('productsTab',this)">Products</button><button onclick="showAdminTab('ordersTab',this)">Orders</button><button onclick="showAdminTab('customersTab',this)">Customers</button><button onclick="showAdminTab('settingsTab',this)">Settings</button></div><div id="overview" class="adminTab"><div class="dash"><div class="stat"><small>Products</small><strong id="statProducts">0</strong></div><div class="stat"><small>Orders</small><strong id="statOrders">0</strong></div><div class="stat"><small>Customers</small><strong id="statCustomers">0</strong></div><div class="stat"><small>Sales</small><strong id="statSales">₦0</strong></div></div><div class="adminPanel"><h3>Recent Orders</h3><div id="recentOrders"></div></div></div><div id="productsTab" class="adminTab hidden"><div class="adminPanel"><h3 id="productFormTitle">Add Product</h3><form class="form adminProduct" id="productForm" onsubmit="saveProduct(event)"><input id="pName" placeholder="Product Name" required><input id="pCategory" placeholder="Category" required><input id="pPrice" type="number" placeholder="Price" required><input id="pEmoji" placeholder="Product Image / Emoji" value="🍓"><textarea id="pDesc" class="full" placeholder="Description" required></textarea><input id="pIngredients" class="full" placeholder="Ingredients"><input type="hidden" id="editId">
+<div class="full">
+    <label style="font-weight:700">Product Image URL</label>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <input
+            id="pImageUrl"
+            type="url"
+            placeholder="Paste direct image URL (https://...)"
+            style="flex:1;min-width:220px;"
+        >
+
+        <button
+            type="button"
+            class="btn secondary"
+            onclick="addProductImageUrl()"
+        >
+            Add Image
+        </button>
+    </div>
+
+    <small style="color:#777;">
+        Paste a direct image link. The first image becomes the main image.
+    </small>
+
+    <div
+        id="imagePreview"
+        style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;"
+    ></div>
+</div>
+  <div
+    id="imagePreview"
+    style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;"
+  ></div>
+</div>  <small style="color:#777">Select one or more images. The first becomes the main image.</small></div><div class="full"><button class="btn primary" id="productSaveBtn">Save Product</button> <button type="button" class="btn secondary" onclick="resetProductForm()">Clear</button></div></form></div><div class="adminPanel"><h3>Manage Products</h3><div id="adminProducts"></div></div></div><div id="ordersTab" class="adminTab hidden"><div class="adminPanel"><h3>Manage Orders</h3><div id="adminOrders"></div></div></div><div id="customersTab" class="adminTab hidden"><div class="adminPanel"><h3>View Customers</h3><div id="adminCustomers"></div></div></div><div id="settingsTab" class="adminTab hidden"><div class="adminPanel"><h3>Settings</h3><p style="color:#777">Firebase collections required by the project: Users, Products, Orders, Categories, Testimonials, Settings.</p><p style="color:#777;margin-top:10px">Firebase is connected to this website. Products, orders, customers and product images use the Firebase project configured in this file.</p></div></div></div></div></section>
 <script type="module">
 
 /* ========================= FIREBASE ========================= */
@@ -828,13 +862,6 @@ import {
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-import {
-    getStorage,
-    ref,
-    uploadBytes,
-    getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyCbquLHG90RJ5bEpU3xZgX01Zhvkmz3lFQ",
@@ -850,7 +877,7 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
+
 
 
 /* ========================= DATA ========================= */
@@ -2531,99 +2558,62 @@ function removePendingImage(index) {
 
 function editProduct(id) {
 
-    const product =
-        products.find(
-            item =>
-                String(item.id) === String(id)
-        );
+    const product = products.find(
+        item => String(item.id) === String(id)
+    );
 
-    if (!product) return;
+    if (!product) {
+        alert("Product not found.");
+        return;
+    }
 
-    document.getElementById(
-        "editId"
-    ).value =
-        product.id;
+    // Product ID
+    document.getElementById("editId").value = product.id;
 
-    document.getElementById(
-        "pName"
-    ).value =
+    // Product details
+    document.getElementById("pName").value =
         product.name || "";
 
-    document.getElementById(
-        "pCategory"
-    ).value =
+    document.getElementById("pCategory").value =
         product.category || "";
 
-    document.getElementById(
-        "pPrice"
-    ).value =
+    document.getElementById("pPrice").value =
         product.price || 0;
 
-    document.getElementById(
-        "pEmoji"
-    ).value =
+    document.getElementById("pEmoji").value =
         product.emoji || "🍓";
 
-    document.getElementById(
-        "pDesc"
-    ).value =
+    document.getElementById("pDesc").value =
         product.description || "";
 
-    document.getElementById(
-        "pIngredients"
-    ).value =
+    document.getElementById("pIngredients").value =
         product.ingredients || "";
 
-    pendingProductImages =
-        product.images
-            ? [...product.images]
-            : [];
+    // Load existing image URLs
+    window.pendingProductImages = Array.isArray(product.images)
+        ? [...product.images]
+        : [];
 
-    document.getElementById(
-        "imagePreview"
-    ).innerHTML =
-        pendingProductImages.map(
-            (src, index) => `
+    // Display existing images
+    renderProductImagePreview();
 
-                <div
-                    class="image-preview-item"
-                >
+    // Change form title
+    const title = document.getElementById("productFormTitle");
 
-                    <img
-                        src="${escapeHTML(src)}"
-                        alt="Product image"
-                    >
+    if (title) {
+        title.textContent = "Edit Product";
+    }
 
-                    <button
-                        type="button"
-                        onclick="
-                            removePendingImage(
-                                ${index}
-                            )
-                        "
-                    >
-                        ×
-                    </button>
+    // Scroll to product form
+    const productsTab = document.getElementById("productsTab");
 
-                </div>
-
-            `
-        ).join("");
-
-    document.getElementById(
-        "productFormTitle"
-    ).textContent =
-        "Edit Product";
-
-    document
-        .getElementById("productsTab")
-        .scrollIntoView({
-            behavior: "smooth"
+    if (productsTab) {
+        productsTab.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
-}
-
-
-/* ========================= DELETE PRODUCT ========================= */
+    }
+}/* ========================= DELETE PRODUCT ========================= */
 
 async function deleteProduct(id) {
 
@@ -2703,157 +2693,33 @@ function resetProductForm() {
         "pIngredients"
     ).value = "";
 
-    document.getElementById(
-        "pImages"
-    ).value = "";
+    // Clear the new image URL input
+    const imageUrlInput =
+        document.getElementById("pImageUrl");
 
-    document.getElementById(
-        "imagePreview"
-    ).innerHTML = "";
-
-    pendingProductImages = [];
-
-    document.getElementById(
-        "productFormTitle"
-    ).textContent =
-        "Add Product";
-}
-
-
-/* ========================= STORAGE UPLOAD ========================= */
-
-async function uploadProductImages(
-    productId,
-    files
-) {
-
-    const urls = [];
-
-    for (
-        const file of files
-    ) {
-
-        if (
-            typeof file === "string"
-        ) {
-
-            urls.push(file);
-            continue;
-        }
-
-        const safeName =
-            file.name.replace(
-                /[^a-zA-Z0-9._-]/g,
-                "_"
-            );
-
-        const storageRef =
-            ref(
-                storage,
-                `Products/${productId}/${Date.now()}_${safeName}`
-            );
-
-        await uploadBytes(
-            storageRef,
-            file
-        );
-
-        const url =
-            await getDownloadURL(
-                storageRef
-            );
-
-        urls.push(url);
+    if (imageUrlInput) {
+        imageUrlInput.value = "";
     }
 
-    return urls;
-}
+    // Clear image preview
+    const imagePreview =
+        document.getElementById("imagePreview");
 
-
-/* ========================= SAVE PRODUCT ========================= */
-
-async function saveProduct(event) {
-    event.preventDefault();
-
-    if (!adminUser) {
-        alert("You must be logged in as an admin.");
-        return;
+    if (imagePreview) {
+        imagePreview.innerHTML = "";
     }
 
-    const editId = document.getElementById("editId").value;
-    const productData = {
-        name: document.getElementById("pName").value.trim(),
-        category: document.getElementById("pCategory").value.trim(),
-        price: Number(document.getElementById("pPrice").value),
-        emoji: document.getElementById("pEmoji").value.trim() || "🍓",
-        description: document.getElementById("pDesc").value.trim(),
-        ingredients: document.getElementById("pIngredients").value.trim(),
-        updatedAt: serverTimestamp()
-    };
+    // Clear pending image URLs
+    window.pendingProductImages = [];
 
-    const button = document.getElementById("productSaveBtn");
-    if (button) {
-        button.disabled = true;
-        button.textContent = "Saving…";
+    // Reset form title
+    const title =
+        document.getElementById("productFormTitle");
+
+    if (title) {
+        title.textContent = "Add Product";
     }
-
-    try {
-        const productId = editId || crypto.randomUUID();
-        const newFiles = pendingProductImages.filter(item => typeof item !== "string");
-        const existingImages = pendingProductImages.filter(item => typeof item === "string");
-        let images = [...existingImages];
-
-        if (newFiles.length) {
-            const uploaded = await uploadProductImages(productId, newFiles);
-            images.push(...uploaded);
-        }
-
-        productData.images = images;
-
-        if (editId) {
-            await updateDoc(doc(db, "Products", editId), productData);
-        } else {
-            productData.createdAt = serverTimestamp();
-            await setDoc(doc(db, "Products", productId), productData);
-        }
-
-        await loadProducts();
-        resetProductForm();
-        await refreshAdmin();
-        alert("Product saved successfully.");
-    } catch (error) {
-        console.error("Save product error:", error);
-        alert("Could not save product:\n" + error.message);
-    } finally {
-        if (button) {
-            button.disabled = false;
-            button.textContent = "Save Product";
-        }
-    }
-}
-
-
-/* ========================= ADMIN LOGIN FORM ========================= */
-
-const adminLoginForm = document.getElementById("adminLoginForm");
-if (adminLoginForm) {
-    adminLoginForm.addEventListener("submit", adminLogin);
-}
-
-const passwordInput = document.getElementById("adminPass");
-const passwordEye = document.getElementById("toggleAdminPassword");
-if (passwordInput && passwordEye) {
-    passwordEye.addEventListener("click", () => {
-        const showing = passwordInput.type === "text";
-        passwordInput.type = showing ? "password" : "text";
-        passwordEye.textContent = showing ? "👁" : "🙈";
-        passwordEye.setAttribute("aria-label", showing ? "Show password" : "Hide password");
-        passwordEye.setAttribute("title", showing ? "Show password" : "Hide password");
-    });
-}
-
-
-/* ========================= AUTH STATE ========================= */
+}/* ========================= AUTH STATE ========================= */
 
 onAuthStateChanged(
     auth,
