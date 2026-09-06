@@ -800,7 +800,7 @@ button, input, textarea, select { max-width:100%; font:inherit; }
 </div>
 <button class="btn primary">Place Order</button></form></div></div>
 <!-- ADMIN -->
-<section class="admin" id="adminSection" style="display:none"><div class="container"><div id="adminLogin" class="login"><div class="eyebrow">Divine Foodies</div><h2>Admin Login</h2><p style="color:#777">Sign in with the Firebase admin account you already created.</p><form class="form" id="adminLoginForm" onsubmit="adminLogin(event)"><input id="adminUser" type="email" placeholder="Admin Email" autocomplete="username" required><div class="password-wrap"><input id="adminPass" type="password" placeholder="Password" autocomplete="current-password" required><button type="button" class="password-eye" id="toggleAdminPassword" aria-label="Show password" title="Show password">👁</button></div><button class="btn primary" id="adminLoginButton">Login</button><div id="loginError" class="loginError" role="alert"></div></form><p style="margin-top:10px;font-size:.8rem;color:#777">Your account must have role: admin in Users/{uid}.</p></div><div id="adminApp" class="hidden"><div class="adminTop"><div><div class="eyebrow">Administration</div><h2>Divine Foodies Dashboard</h2><small id="adminIdentity" style="color:#777"></small></div><button class="btn secondary" onclick="logoutAdmin()">Logout</button></div><div class="adminNav"><button class="active" onclick="showAdminTab('overview',this)">Overview</button><button onclick="showAdminTab('productsTab',this)">Products</button><button onclick="showAdminTab('ordersTab',this)">Orders</button><button onclick="showAdminTab('customersTab',this)">Customers</button><button onclick="showAdminTab('settingsTab',this)">Settings</button></div><div id="overview" class="adminTab"><div class="dash"><div class="stat"><small>Products</small><strong id="statProducts">0</strong></div><div class="stat"><small>Orders</small><strong id="statOrders">0</strong></div><div class="stat"><small>Customers</small><strong id="statCustomers">0</strong></div><div class="stat"><small>Sales</small><strong id="statSales">₦0</strong></div></div><div class="adminPanel"><h3>Recent Orders</h3><div id="recentOrders"></div></div></div><div id="productsTab" class="adminTab hidden"><div class="adminPanel"><h3 id="productFormTitle">Add Product</h3><form class="form adminProduct" id="productForm" onsubmit="saveProduct(event)"><input id="pName" placeholder="Product Name" required><input id="pCategory" placeholder="Category" required><input id="pPrice" type="number" placeholder="Price" required><input id="pEmoji" placeholder="Product Image / Emoji" value="🍓"><textarea id="pDesc" class="full" placeholder="Description" required></textarea><input id="pIngredients" class="full" placeholder="Ingredients"><input type="hidden" id="editId"><div class="full"><label style="font-weight:700">Product Images</label>
+<section class="admin" id="adminSection" style="display:none"><div class="container"><div id="adminLogin" class="login"><div class="eyebrow">Divine Foodies</div><h2>Admin Login</h2><p style="color:#777">Sign in with the Firebase admin account you already created.</p><form class="form" id="adminLoginForm" onsubmit="adminLogin(event)"><input id="adminUser" type="email" placeholder="Admin Email" autocomplete="username" required><div class="password-wrap"><input id="adminPass" type="password" placeholder="Password" autocomplete="current-password" required><button type="button" class="password-eye" id="toggleAdminPassword" aria-label="Show password" title="Show password">👁</button></div><button class="btn primary" id="adminLoginButton">Login</button><div id="loginError" class="loginError" role="alert"></div></form><p style="margin-top:10px;font-size:.8rem;color:#777">Your account must have role: admin in Users/{uid}.</p></div><div id="adminApp" class="hidden"><div class="adminTop"><div><div class="eyebrow">Administration</div><h2>Divine Foodies Dashboard</h2><small id="adminIdentity" style="color:#777"></small></div><button class="btn secondary" onclick="logoutAdmin()">Logout</button></div><div class="adminNav"><button class="active" onclick="showAdminTab('overview',this)">Overview</button><button onclick="showAdminTab('productsTab',this)">Products</button><button onclick="showAdminTab('ordersTab',this)">Orders</button><button onclick="showAdminTab('customersTab',this)">Customers</button><button onclick="showAdminTab('settingsTab',this)">Settings</button></div><div id="overview" class="adminTab"><div class="dash"><div class="stat"><small>Products</small><strong id="statProducts">0</strong></div><div class="stat"><small>Orders</small><strong id="statOrders">0</strong></div><div class="stat"><small>Customers</small><strong id="statCustomers">0</strong></div><div class="stat"><small>Sales</small><strong id="statSales">₦0</strong></div></div><div class="adminPanel"><h3>Recent Orders</h3><div id="recentOrders"></div></div></div><div id="productsTab" class="adminTab hidden"><div class="adminPanel"><h3 id="productFormTitle">Add Product</h3><form class="form adminProduct" id="productForm"><input id="pName" placeholder="Product Name" required><input id="pCategory" placeholder="Category" required><input id="pPrice" type="number" placeholder="Price" required><input id="pEmoji" placeholder="Product Image / Emoji" value="🍓"><textarea id="pDesc" class="full" placeholder="Description" required></textarea><input id="pIngredients" class="full" placeholder="Ingredients"><input type="hidden" id="editId"><div class="full"><label style="font-weight:700">Product Images</label>
    <div class="full">
   <label style="font-weight:700">Product Image URL</label>
 
@@ -2861,6 +2861,13 @@ function route() {
 }
 
 
+/* ========================= FORM EVENT BINDINGS ========================= */
+
+const productForm = document.getElementById("productForm");
+if (productForm) {
+    productForm.addEventListener("submit", saveProduct);
+}
+
 /* ========================= GLOBAL FUNCTIONS ========================= */
 
 window.adminLogin = adminLogin;
@@ -2904,6 +2911,10 @@ window.resetProductForm =
 
 
 /* ========================= START ========================= */
+
+// Render the correct page immediately. The load listener below also refreshes data.
+route();
+
 
 window.addEventListener(
     "hashchange",
